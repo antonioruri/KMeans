@@ -24,7 +24,6 @@ public class MainTest {
 				System.out.println(kmeans.getC().toString(data));
 			}catch (OutOfRangeSamples error){
 				System.err.println(error);
-
 			}
 			System.out.println("Vuoi ripetere l'opearazione? y/n: ");
 		} while (Keyboard.readChar() == 'y');

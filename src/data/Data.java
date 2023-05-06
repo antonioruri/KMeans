@@ -1,7 +1,6 @@
 package data;
 
 import utility.ArraySet;
-import data.OutOfRangeSamples;
 import java.util.Random;
 
 /**
@@ -244,6 +243,8 @@ public class Data {
 	 * numero totale di righe della matrice di dati se corrisponde ad un centroide già selezionato e
 	 * memorizzato in <code>centroidIndexes</code>
 	 * @param k numero di centroidi casuali da selezionare da un insieme di dati
+	 * @throws OutOfRangeSamples se k il numero di cluster da generare è maggiore del numero
+	 * di cluster generabili o troppo piccolo
 	 * @return array di k interi contenente gli indici di riga in data per le
 	 * tuple corrispondenti ai centroidi selezionati
 	 */
@@ -251,8 +252,10 @@ public class Data {
 		//choose k random different centroids in data.
 
 		//lancia un'ecczione se k non è valido
-		if(k<=0 || k>distinctTuple){
-			throw new OutOfRangeSamples();
+		if(k > distinctTuple){
+			throw new OutOfRangeSamples("Numero k maggiore del numero di cluster generabili");
+		}else if(k <= 0){
+				throw new OutOfRangeSamples("Numero k troppo piccolo");
 		}
 
 

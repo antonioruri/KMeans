@@ -3,7 +3,6 @@ package mining;
 import data.Data;
 import data.OutOfRangeSamples;
 import data.Tuple;
-import mining.Cluster;
 
 /**
  * Classe che rappresenta un insieme di cluster. Gli oggetti di questa classe
@@ -47,6 +46,8 @@ public class ClusterSet {
      * casualmente i centroidi dei cluster e crea una nuova istanza di mining.Cluster per ciascun centroide.
      * I nuovi cluster vengono aggiunti nell'array <code>C</code> della classe <code>mining.ClusterSet</code>
      * @param data oggetto di tipo <code>data.Data</code> contenente gli esempi da usare per inizializzare i centroidi
+     * @throws OutOfRangeSamples se k il numero di cluster da generare è maggiore del numero
+     * di cluster generabili o troppo piccolo
      */
     void initializeCentroids(Data data) throws OutOfRangeSamples {
         int[] centroidIndexes=data.sampling(C.length);
