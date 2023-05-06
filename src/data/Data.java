@@ -1,6 +1,7 @@
 package data;
 
 import utility.ArraySet;
+
 import java.util.Random;
 
 /**
@@ -9,20 +10,24 @@ import java.util.Random;
 public class Data {
 
 	/**
+	 * Numero di tuple distinte nel dataset
+	 */
+	private int distinctTuple;
+	/**
 	 * Matrice di <code>Object</code> con numero di righe pari al numero di transazioni da memorizzare
 	 * e numero di colonne pari al numero di attributi in ciascuna transazione
 	 */
-	public Object data[][];
+	private Object data[][];
 
 	/**
 	 * Cardinalità dell’insieme di transazioni (numero di righe in data)
 	 */
-	int numberOfExamples;
+	private int numberOfExamples;
 
 	/**
 	 * Vettore degli attributi in ciascuna tupla che sono avvalorati in ciscuna transione (schema della tabella di dati)
 	 */
-	Attribute attributeSet[];
+	private Attribute attributeSet[];
 
 	/**
 	 * Costruttore: inizializza la matrice data [ ][ ] con transazioni di esempio
@@ -32,6 +37,7 @@ public class Data {
 	public Data(){
 		
 		data = new Object[14][5];
+
 
 		data[0][0]=new String ("sunny");
 		data[1][0]=new String ("sunny");
@@ -147,6 +153,8 @@ public class Data {
 		playTennisValue[0]="yes";
 		playTennisValue[1]="no";
 		attributeSet[4] = new DiscreteAttribute("PlayTennis",4, playTennisValue);
+
+		distinctTuple=countDistinctTuples();
 		
 	}
 
@@ -215,6 +223,7 @@ public class Data {
 		return table;
 	}
 
+
 	/**
 	 * Crea e restituisce un oggetto di <code>data.Tuple</code> che modella
 	 * come sequenza di coppie Attributo-valore la i-esima riga in <code>data</code>
@@ -222,9 +231,9 @@ public class Data {
 	 * @return
 	 */
 	public Tuple getItemSet(int index){
-		Tuple tuple=new Tuple(attributeSet.length);
-		for(int i = 0; i < attributeSet.length; i++)
-			tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet[i], (String)data[index][i]), i);
+		Tuple tuple=new Tuple(getNumberOfAttributes());
+		for(int i = 0; i < getNumberOfAttributes(); i++)
+			tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i), (String)getAttributeValue(index,i)), i);
 		return tuple;
 	}
 
@@ -242,7 +251,6 @@ public class Data {
 		//choose k random different centroids in data.
 		int centroidIndexes[]=new int[k];
 		Random rand = new Random();
-
 		rand.setSeed(System.currentTimeMillis());
 
 		for (int i = 0; i < k; i++){
@@ -270,13 +278,34 @@ public class Data {
 	 * @return true se gli elementi delle tuple sono uguali, false altrimenti
 	 */
 	private boolean compare(int i, int j){
-		boolean equals = false;
-		for(int k = 0; k < attributeSet.length; k++){
-			if(!data[i][k].equals(data[j][k])){
-				equals = false;
+		for(int k = 0; k < getNumberOfAttributes(); k++){
+			if(!getAttributeValue(i,k).equals(getAttributeValue(j,k))){
+				return false;
 			}
 		}
-		return equals;
+		return true;
+	}
+
+	/**
+	 * Conta il numero di transazioni distinte memorizzate in data.
+	 * @return Numero di transazioni distinte
+	 */
+
+	private int countDistinctTuples() {
+		boolean[] seen = new boolean[getNumberOfExamples()];
+		int count = 0;
+		for (int i = 0; i < getNumberOfExamples(); i++) {
+			if (!seen[i]) {
+				count++;
+				for (int j = i + 1; j < getNumberOfExamples(); j++) {
+					if (!seen[j] && compare(i, j)) {
+						seen[j] = true;
+					}
+				}
+			}
+			seen[i] = true;
+		}
+		return count;
 	}
 
 	/**
@@ -296,7 +325,7 @@ public class Data {
 	 * @param attribute attributo discreto di cui calcolare il prototipo
 	 * @return il valore dell'attributo discreto più frequente
 	 */
-	String computePrototype(ArraySet idList, DiscreteAttribute attribute){
+	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
 		int maxFreq = attribute.frequency(this, idList, attribute.getValue(0));
 		int currentFreq;
 		String mostFrequentValue = attribute.getValue(0);
@@ -318,6 +347,7 @@ public class Data {
 	public static void main(String args[]){
 		Data trainingSet=new Data();
 		System.out.println(trainingSet);
+
 	}
 
 }
