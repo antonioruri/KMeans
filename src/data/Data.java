@@ -1,7 +1,7 @@
 package data;
 
 import utility.ArraySet;
-
+import data.OutOfRangeSamples;
 import java.util.Random;
 
 /**
@@ -247,8 +247,15 @@ public class Data {
 	 * @return array di k interi contenente gli indici di riga in data per le
 	 * tuple corrispondenti ai centroidi selezionati
 	 */
-	public int[] sampling(int k){
+	public int[] sampling(int k) throws OutOfRangeSamples{
 		//choose k random different centroids in data.
+
+		//lancia un'ecczione se k non è valido
+		if(k<=0 || k>distinctTuple){
+			throw new OutOfRangeSamples();
+		}
+
+
 		int centroidIndexes[]=new int[k];
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());

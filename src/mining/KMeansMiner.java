@@ -1,6 +1,7 @@
 package mining;
 
 import data.Data;
+import data.OutOfRangeSamples;
 
 public class KMeansMiner {
     ClusterSet C;
@@ -13,7 +14,7 @@ public class KMeansMiner {
         return C;
     }
 
-    public int kmeans(Data data){
+    public int kmeans(Data data) throws OutOfRangeSamples {
         //System.out.println("qua");
         int numberOfIterations=0;
         //STEP 1

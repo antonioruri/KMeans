@@ -1,6 +1,7 @@
 package mining;
 
 import data.Data;
+import data.OutOfRangeSamples;
 import data.Tuple;
 import mining.Cluster;
 
@@ -47,7 +48,7 @@ public class ClusterSet {
      * I nuovi cluster vengono aggiunti nell'array <code>C</code> della classe <code>mining.ClusterSet</code>
      * @param data oggetto di tipo <code>data.Data</code> contenente gli esempi da usare per inizializzare i centroidi
      */
-    void initializeCentroids(Data data){
+    void initializeCentroids(Data data) throws OutOfRangeSamples {
         int[] centroidIndexes=data.sampling(C.length);
         for(int i=0;i<centroidIndexes.length;i++) {
             Tuple centroidI=data.getItemSet(centroidIndexes[i]);
