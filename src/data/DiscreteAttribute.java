@@ -49,7 +49,7 @@ class DiscreteAttribute extends Attribute {
      * Determina il numero di volte che il terrmine <code>v</code> passato in input compare in corrispondenza
      * dell'attributo corrente (indice di colonna) negli esempi memorizzati
      * in <code>data</code> e indicizzate (per riga) da <code>idList</code>
-     * @param data riferimento ad un oggetto di tipo data.Data
+     * @param data riferimento ad un oggetto di tipo Data
      * @param idList riferimento ad un oggetto di tipo utility.ArraySet
      * @param v valore discreto da contare nella tupla
      * @return numero di occorrenze del valore discreto
