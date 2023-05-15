@@ -56,6 +56,7 @@ public class Data {
 			return 0;
 		}
 
+
 		public String toString(){
 			String str = new String();
 			for(Object e : this.example)
