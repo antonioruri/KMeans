@@ -1,12 +1,68 @@
 package data;
-
+//da eliminare
 import utility.ArraySet;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Classe che modella l'insieme di transazioni o tuple
  */
 public class Data {
+	class Example implements Comparable<Example>{
+
+		/**
+		 * Array di object che rappresentano la singola transazione (o riga di una tabella)
+		 */
+		private List<Object> example = new ArrayList<Object>();
+
+		/**
+		 * Aggiunge in coda ad example
+		 * @param o membro da aggiungere in coda
+		 */
+		void add(Object o){
+			example.add(o);
+		}
+
+		/**
+		 * Restituisce l'elemento alla posizione specificata nella lista
+		 * @param i indice dell'elemento da restituire
+		 * @return l'elemento alla posizione specificata nella lista
+		 */
+		private Object get(int i){
+			return example.get(i);
+		}
+
+		/**
+		 * Restituisce 0, -1, 1 sulla base del risultato del confronto. 0 se i due esempi includono gli stessi valori.
+		 * Altrimenti il risultato del compareTo(...) invocato sulla prima coppia di valori in disaccordo.
+		 * @param ex lista da confrontare
+		 * @return 0 se i valori sono uguali. ALtrimenti -1 o 1 sulla base del risultato de l confronto.
+		 */
+		public int compareTo(Example ex) {
+			Iterator<Object> thisIt = this.example.iterator();
+			Iterator<Object> exIt = ex.example.iterator();
+
+			while(thisIt.hasNext() && exIt.hasNext()) {
+				Object thisObj = thisIt.next();
+				Object exObj = exIt.next();
+
+				if (!thisObj.equals(exObj)) {
+					return ((Comparable) thisObj).compareTo(exObj);
+				}
+			}
+			return 0;
+		}
+
+		public String toString(){
+			String str = new String();
+			for(Object e : this.example)
+				str += e.toString()+" ";
+			return str;
+		}
+	}
 
 	/**
 	 * Numero di tuple distinte nel dataset

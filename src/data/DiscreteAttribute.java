@@ -1,16 +1,19 @@
 package data;
 
-import java.util.Arrays;
+import java.util.Iterator;
+import java.util.TreeSet;
+
+//da eliminare
 import utility.ArraySet;
 /**
  * Estende la classe data.Attribute e rappresenta un attributo discreto
  */
-class DiscreteAttribute extends Attribute {
+class DiscreteAttribute extends Attribute implements Iterable<String>{
     /**
-     * Array di oggetti <code>String</code>, uno per ciascun valore del dominio discreto.
+     * Set ordinato di stringhe, uno per ciascun valore del dominio discreto.
      * I valori del dominio sono memorizzati in <code>values</code> seguendo un ordine lessicografico.
      */
-    private String values[];
+    private TreeSet<String> values = new TreeSet<String>();
 
     /**
      * Costrutture: invoca il costruttore della superclasse e avvalora
@@ -22,8 +25,8 @@ class DiscreteAttribute extends Attribute {
      */
     DiscreteAttribute(String name, int index, String values[]) {
         super(name, index);
-        this.values = values;
-        Arrays.sort(this.values);
+        for(int i=0; i< values.length; i++)
+            this.values.add(values[i]);
     }
 
     /**
@@ -31,17 +34,7 @@ class DiscreteAttribute extends Attribute {
      * @return numero di valori discreti nel dominio dell'attributo
      */
     int getNumberOfDistinctValues() {
-        return values.length;
-    }
-
-    /**
-     * Restituisce il valore values[i]
-     *
-     * @param i posizione di un valore in values
-     * @return valore discreto nella posizione "i" di values
-     */
-    String getValue(int i) {
-        return values[i];
+        return values.size();
     }
 
 
@@ -63,4 +56,8 @@ class DiscreteAttribute extends Attribute {
         return frequenza;
     }
 
+    @Override
+    public Iterator<String> iterator() {
+        return values.iterator();
+    }
 }
