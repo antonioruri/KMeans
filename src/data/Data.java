@@ -2,10 +2,7 @@ package data;
 //da eliminare
 import utility.ArraySet;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Classe che modella l'insieme di transazioni o tuple
@@ -56,7 +53,7 @@ public class Data {
 			return 0;
 		}
 
-
+		@Override
 		public String toString(){
 			String str = new String();
 			for(Object e : this.example)
@@ -65,15 +62,12 @@ public class Data {
 		}
 	}
 
-	/**
-	 * Numero di tuple distinte nel dataset
-	 */
-	private int distinctTuple;
+
 	/**
 	 * Matrice di <code>Object</code> con numero di righe pari al numero di transazioni da memorizzare
 	 * e numero di colonne pari al numero di attributi in ciascuna transazione
 	 */
-	private Object data[][];
+	private List<Example> data;
 
 	/**
 	 * Cardinalità dell’insieme di transazioni (numero di righe in data)
@@ -83,7 +77,7 @@ public class Data {
 	/**
 	 * Vettore degli attributi in ciascuna tupla che sono avvalorati in ciscuna transione (schema della tabella di dati)
 	 */
-	private Attribute attributeSet[];
+	private List<Attribute> attributeSet = new LinkedList<Attribute>();
 
 	/**
 	 * Costruttore: inizializza la matrice data [ ][ ] con transazioni di esempio
@@ -92,92 +86,116 @@ public class Data {
 	 */
 	public Data(){
 		
-		data = new Object[14][5];
+		//data = new Object[14][5];
+		TreeSet<Example> tempData = new TreeSet<Example>();
 
+		Example ex0 = new Example();
+		Example ex1 = new Example();
+		Example ex2 = new Example();
+		Example ex3 = new Example();
+		Example ex4 = new Example();
+		Example ex5 = new Example();
+		Example ex6 = new Example();
+		Example ex7 = new Example();
+		Example ex8 = new Example();
+		Example ex9 = new Example();
+		Example ex10 = new Example();
+		Example ex11 = new Example();
+		Example ex12 = new Example();
+		Example ex13 = new Example();
 
-		data[0][0]=new String ("sunny");
-		data[1][0]=new String ("sunny");
-		data[2][0]=new String ("overcast");
-		data[3][0]=new String ("rain");
-		data[4][0]=new String ("rain");
-		data[5][0]=new String ("rain");
-		data[6][0]=new String ("overcast");
-		data[7][0]=new String ("sunny");
-		data[8][0]=new String ("sunny");
-		data[9][0]=new String ("rain");
-		data[10][0]=new String ("sunny");
-		data[11][0]=new String ("overcast");
-		data[12][0]=new String ("overcast");
-		data[13][0]=new String ("rain");
-		
-		data[0][1]=new String ("hot");
-		data[1][1]=new String ("hot");
-		data[2][1]=new String ("hot");
-		data[3][1]=new String ("mild");
-		data[4][1]=new String ("cool");
-		data[5][1]=new String ("cool");
-		data[6][1]=new String ("cool");
-		data[7][1]=new String ("mild");
-		data[8][1]=new String ("cool");
-		data[9][1]=new String ("mild");
-		data[10][1]=new String ("mild");
-		data[11][1]=new String ("mild");
-		data[12][1]=new String ("hot");
-		data[13][1]=new String ("mild");
-		
-		data[0][2]=new String ("high");
-		data[1][2]=new String ("high");
-		data[2][2]=new String ("high");
-		data[3][2]=new String ("high");
-		data[4][2]=new String ("normal");
-		data[5][2]=new String ("normal");
-		data[6][2]=new String ("normal");
-		data[7][2]=new String ("high");
-		data[8][2]=new String ("normal");
-		data[9][2]=new String ("normal");
-		data[10][2]=new String ("normal");
-		data[11][2]=new String ("high");
-		data[12][2]=new String ("normal");
-		data[13][2]=new String ("high");
+		ex0.add(new String ("sunny"));
+		ex1.add(new String ("sunny"));
+		ex2.add(new String ("overcast"));
+		ex3.add(new String ("rain"));
+		ex4.add(new String ("rain"));
+		ex5.add(new String ("rain"));
+		ex6.add(new String ("overcast"));
+		ex7.add(new String ("sunny"));
+		ex8.add(new String ("sunny"));
+		ex9.add(new String ("rain"));
+		ex10.add(new String ("sunny"));
+		ex11.add(new String ("overcast"));
+		ex12.add(new String ("overcast"));
+		ex13.add(new String ("rain"));
 
-		data[0][3]=new String ("weak");
-		data[1][3]=new String ("strong");
-		data[2][3]=new String ("weak");
-		data[3][3]=new String ("weak");
-		data[4][3]=new String ("weak");
-		data[5][3]=new String ("strong");
-		data[6][3]=new String ("strong");
-		data[7][3]=new String ("weak");
-		data[8][3]=new String ("weak");
-		data[9][3]=new String ("weak");
-		data[10][3]=new String ("strong");
-		data[11][3]=new String ("strong");
-		data[12][3]=new String ("weak");
-		data[13][3]=new String ("strong");
+		ex0.add(new String ("hot"));
+		ex1.add(new String ("hot"));
+		ex2.add(new String ("hot"));
+		ex3.add(new String ("mild"));
+		ex4.add(new String ("cool"));
+		ex5.add(new String ("cool"));
+		ex6.add(new String ("cool"));
+		ex7.add(new String ("mild"));
+		ex8.add(new String ("cool"));
+		ex9.add(new String ("mild"));
+		ex10.add(new String ("mild"));
+		ex11.add(new String ("mild"));
+		ex12.add(new String ("hot"));
+		ex13.add(new String ("mild"));
 
-		data[0][4]=new String ("no");
-		data[1][4]=new String ("no");
-		data[2][4]=new String ("yes");
-		data[3][4]=new String ("yes");
-		data[4][4]=new String ("yes");
-		data[5][4]=new String ("no");
-		data[6][4]=new String ("yes");
-		data[7][4]=new String ("no");
-		data[8][4]=new String ("yes");
-		data[9][4]=new String ("yes");
-		data[10][4]=new String ("yes");
-		data[11][4]=new String ("yes");
-		data[12][4]=new String ("yes");
-		data[13][4]=new String ("no");
+		ex0.add(new String ("high"));
+		ex1.add(new String ("high"));
+		ex2.add(new String ("high"));
+		ex3.add(new String ("high"));
+		ex4.add(new String ("normal"));
+		ex5.add(new String ("normal"));
+		ex6.add(new String ("normal"));
+		ex7.add(new String ("high"));
+		ex8.add(new String ("normal"));
+		ex9.add(new String ("normal"));
+		ex10.add(new String ("normal"));
+		ex11.add(new String ("high"));
+		ex12.add(new String ("normal"));
+		ex13.add(new String ("high"));
 
-		// numberOfExamples
-		 numberOfExamples=14;		 
+		ex0.add(new String ("weak"));
+		ex1.add(new String ("strong"));
+		ex2.add(new String ("weak"));
+		ex3.add(new String ("weak"));
+		ex4.add(new String ("weak"));
+		ex5.add(new String ("strong"));
+		ex6.add(new String ("strong"));
+		ex7.add(new String ("weak"));
+		ex8.add(new String ("weak"));
+		ex9.add(new String ("weak"));
+		ex10.add(new String ("strong"));
+		ex11.add(new String ("strong"));
+		ex12.add(new String ("weak"));
+		ex13.add(new String ("strong"));
 
-		//explanatory Set
-		/**
-		 * Inizializza attributeSet creando cinque oggetti di tipo <code>DiscreteAttribute</code>, uno per ciascun attributo
-		 */
-		attributeSet = new Attribute[5];
+		ex0.add(new String ("no"));
+		ex1.add(new String ("no"));
+		ex2.add(new String ("yes"));
+		ex3.add(new String ("yes"));
+		ex4.add(new String ("yes"));
+		ex5.add(new String ("no"));
+		ex6.add(new String ("yes"));
+		ex7.add(new String ("no"));
+		ex8.add(new String ("yes"));
+		ex9.add(new String ("yes"));
+		ex10.add(new String ("yes"));
+		ex11.add(new String ("yes"));
+		ex12.add(new String ("yes"));
+		ex13.add(new String ("no"));
+
+		tempData.add(ex0);
+		tempData.add(ex1);
+		tempData.add(ex2);
+		tempData.add(ex3);
+		tempData.add(ex4);
+		tempData.add(ex5);
+		tempData.add(ex6);
+		tempData.add(ex7);
+		tempData.add(ex8);
+		tempData.add(ex9);
+		tempData.add(ex10);
+		tempData.add(ex11);
+		tempData.add(ex12);
+		tempData.add(ex13);
+
+		data = new ArrayList<Example>(tempData);
+		numberOfExamples = tempData.size();
 
 		/**
 		 * Viene avvalorato ciascun elemento di <code>attributeSet</code> con un oggetto della classe <code>DiscreteAttribute</code>
@@ -187,30 +205,28 @@ public class Data {
 		outLookValues[0]="overcast";
 		outLookValues[1]="rain";
 		outLookValues[2]="sunny";
-		attributeSet[0] = new DiscreteAttribute("Outlook",0, outLookValues);
+		attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
 
 		String temperatureValues[]=new String[3];
 		temperatureValues[0]="cool";
 		temperatureValues[1]="mild";
 		temperatureValues[2]="hot";
-		attributeSet[1] = new DiscreteAttribute("Temperature",1, temperatureValues);
+		attributeSet.add(new DiscreteAttribute("Temperature",1, temperatureValues));
 
 		String humidityValues[]=new String[2];
 		humidityValues[0]="normal";
 		humidityValues[1]="high";
-		attributeSet[2] = new DiscreteAttribute("Humidity",2, humidityValues);
+		attributeSet.add(new DiscreteAttribute("Humidity",2, humidityValues));
 
 		String windValues[]=new String[2];
 		windValues[0]="strong";
 		windValues[1]="weak";
-		attributeSet[3] = new DiscreteAttribute("Wind",3, windValues);
+		attributeSet.add(new DiscreteAttribute("Wind",3, windValues));
 
 		String playTennisValue[]=new String[2];
 		playTennisValue[0]="yes";
 		playTennisValue[1]="no";
-		attributeSet[4] = new DiscreteAttribute("PlayTennis",4, playTennisValue);
-
-		distinctTuple=countDistinctTuples();
+		attributeSet.add(new DiscreteAttribute("PlayTennis",4, playTennisValue));
 		
 	}
 
@@ -219,7 +235,7 @@ public class Data {
 	 * @return cardilità dell'insieme di transazioni
 	 */
 	public int getNumberOfExamples(){
-		return numberOfExamples;
+		return this.numberOfExamples;
 	}
 
 	/**
@@ -227,18 +243,8 @@ public class Data {
 	 * @return cardinalità dell'insieme degli attributi
 	 */
 	public int getNumberOfAttributes(){
-		return attributeSet.length;
+		return this.attributeSet.size();
 	}
-
-	/**
-	* Restituisce attributeSet
-	* @return schema dei dati
-	*/
-	private Attribute[] getAttributeSchema(){
-		return attributeSet;
-	}
-	//TO DO: getAttributeSchema() e getAttribute(int index) sono la stessa cosa?
-	// nel pdf c'è scritto getAttributeSchema nella classe data.Data ma nel suo file c'è getAttribute() di tipo Attribute (non è presente getAttributeSchema)
 
 	/**
 	 * Restituisce il valore dell'attributo <code>attributeIndex</code> per la tupla <code>exampleIndex</code> memorizzata in data
@@ -248,7 +254,7 @@ public class Data {
 	 * nella tupla identificata da exampleindex nel membro data
 	 */
 	public Object getAttributeValue(int exampleIndex, int attributeIndex){
-		return data[exampleIndex][attributeIndex];
+		return this.data.get(exampleIndex).get(attributeIndex);
 	}
 
 	/**
@@ -257,7 +263,7 @@ public class Data {
 	 * @return attributo con indice index in attributeSet
 	 */
 	private Attribute getAttribute(int index){
-		return attributeSet[index];
+		return attributeSet.get(index);
 	}
 
 	@Override
@@ -272,7 +278,7 @@ public class Data {
 		for(int i=0; i < getNumberOfExamples(); i++){
 			table += i+1+ ": ";
 			for(int j=0; j < getNumberOfAttributes(); j++ ){
-				table = table +  getAttributeValue(i,j) + (j == attributeSet.length - 1 ? "" : ",");
+				table = table +  getAttributeValue(i,j) + (j == getNumberOfAttributes() - 1 ? "" : ",");
 			}
 			table += "\n";
 		}
@@ -309,17 +315,15 @@ public class Data {
 		//choose k random different centroids in data.
 
 		//lancia un'ecczione se k non è valido
-		if(k > distinctTuple){
+		if(k > getNumberOfExamples()){
 			throw new OutOfRangeSamples("Numero k maggiore del numero di cluster generabili");
-		}else if(k <= 0){
+		}else if(k == 0){
 				throw new OutOfRangeSamples("Numero k troppo piccolo");
 		}
-
 
 		int centroidIndexes[]=new int[k];
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
-
 		for (int i = 0; i < k; i++){
 			boolean found = false;
 			int c;
@@ -354,28 +358,6 @@ public class Data {
 	}
 
 	/**
-	 * Conta il numero di transazioni distinte memorizzate in data.
-	 * @return Numero di transazioni distinte
-	 */
-
-	private int countDistinctTuples() {
-		boolean[] seen = new boolean[getNumberOfExamples()];
-		int count = 0;
-		for (int i = 0; i < getNumberOfExamples(); i++) {
-			if (!seen[i]) {
-				count++;
-				for (int j = i + 1; j < getNumberOfExamples(); j++) {
-					if (!seen[j] && compare(i, j)) {
-						seen[j] = true;
-					}
-				}
-			}
-			seen[i] = true;
-		}
-		return count;
-	}
-
-	/**
 	 * Restituisce computePrototype(idList, (DiscreteAttribute)attribute)
 	 * @param idList indici delle tuple da considerare nel calcolo del prototipo
 	 * @param attribute attributo rispetto al quale calcolare il prototipo (centroide)
@@ -393,14 +375,18 @@ public class Data {
 	 * @return il valore dell'attributo discreto più frequente
 	 */
 	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
-		int maxFreq = attribute.frequency(this, idList, attribute.getValue(0));
+		Iterator<String> it = attribute.iterator();
+
+		int maxFreq = attribute.frequency(this, idList, it.next());
 		int currentFreq;
-		String mostFrequentValue = attribute.getValue(0);
-		for(int i = 1; i < attribute.getNumberOfDistinctValues(); i++){
-			currentFreq = attribute.frequency(this, idList, attribute.getValue(i));
+		String mostFrequentValue = it.next();
+		String temp;
+		while(it.hasNext()){
+			temp = it.next();
+			currentFreq = attribute.frequency(this, idList, temp);
 			if(currentFreq > maxFreq){
 				maxFreq = currentFreq;
-				mostFrequentValue = attribute.getValue(i);
+				mostFrequentValue = temp;
 			}
 		}
 		return mostFrequentValue;
