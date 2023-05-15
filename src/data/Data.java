@@ -374,19 +374,19 @@ public class Data {
 	 * @param attribute attributo discreto di cui calcolare il prototipo
 	 * @return il valore dell'attributo discreto più frequente
 	 */
-	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
+	private String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
 		Iterator<String> it = attribute.iterator();
-
-		int maxFreq = attribute.frequency(this, idList, it.next());
+		Iterator<String> it1 = attribute.iterator();
+		String mostFrequentValue = "";
+		String currentValue;
+		int maxFreq=0;
 		int currentFreq;
-		String mostFrequentValue = it.next();
-		String temp;
-		while(it.hasNext()){
-			temp = it.next();
-			currentFreq = attribute.frequency(this, idList, temp);
-			if(currentFreq > maxFreq){
-				maxFreq = currentFreq;
-				mostFrequentValue = temp;
+		while(it.hasNext() && it1.hasNext()) {
+			currentFreq=attribute.frequency(this, idList, it.next());
+			currentValue=it1.next();
+			if(currentFreq>=maxFreq) {
+				maxFreq=currentFreq;
+				mostFrequentValue=currentValue;
 			}
 		}
 		return mostFrequentValue;
