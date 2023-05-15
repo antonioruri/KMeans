@@ -1,10 +1,9 @@
 package data;
 
 import java.util.Iterator;
+import java.util.Set;
 import java.util.TreeSet;
 
-//da eliminare
-import utility.ArraySet;
 /**
  * Estende la classe data.Attribute e rappresenta un attributo discreto
  */
@@ -47,13 +46,20 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
      * @param v valore discreto da contare nella tupla
      * @return numero di occorrenze del valore discreto
      */
-    int frequency(Data data, ArraySet idList, String v){
+    int frequency(Data data, Set<Integer> idList, String v){
+        int[] idArray = new int[idList.size()];
+        int i = 0;
+        for (Integer id : idList) {
+            idArray[i++] = id;
+        }
         int frequenza = 0;
-        int[] idArray = idList.toArray();
-        for(int i=0; i < idArray.length; i++)
-            if(data.getAttributeValue(idArray[i], getIndex()).equals(v))
+        for (int j = 0; j < idArray.length; j++) {
+            if (data.getAttributeValue(idArray[j], getIndex()).equals(v)) {
                 frequenza++;
+            }
+        }
         return frequenza;
+
     }
 
     @Override

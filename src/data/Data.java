@@ -1,6 +1,4 @@
 package data;
-//da eliminare
-import utility.ArraySet;
 
 import java.util.*;
 
@@ -363,7 +361,7 @@ public class Data {
 	 * @param attribute attributo rispetto al quale calcolare il prototipo (centroide)
 	 * @return valore dell'attributo più frequente
 	 */
-	Object computePrototype(ArraySet idList, Attribute attribute){
+	Object computePrototype(Set<Integer> idList, Attribute attribute){
 		return computePrototype(idList, (DiscreteAttribute)attribute);
 	}
 
@@ -374,7 +372,7 @@ public class Data {
 	 * @param attribute attributo discreto di cui calcolare il prototipo
 	 * @return il valore dell'attributo discreto più frequente
 	 */
-	private String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
+	private String computePrototype(Set<Integer> idList,DiscreteAttribute attribute) {
 		Iterator<String> it = attribute.iterator();
 		Iterator<String> it1 = attribute.iterator();
 		String mostFrequentValue = "";

@@ -2,7 +2,10 @@ package mining;
 
 import data.Data;
 import data.Tuple;
-import utility.ArraySet;
+
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * La classe mining.Cluster rappresenta un cluster, ovvero un gruppo di tuple che sono
@@ -17,7 +20,7 @@ public class Cluster {
 	/**
 	 * Insieme di identificatori di tuple che appartengono al cluster
 	 */
-	private ArraySet clusteredData;
+	private Set<Integer> clusteredData;
 
 	/**
 	 * Costruttore di classe. Inizializza il membro <code>centroid</code> con il valore passato in input
@@ -26,7 +29,7 @@ public class Cluster {
 	 */
 	Cluster(Tuple centroid){
 		this.centroid = centroid;
-		clusteredData = new ArraySet();
+		clusteredData =new HashSet<Integer>();
 		
 	}
 
@@ -65,7 +68,7 @@ public class Cluster {
 	 * @return true se la tupla è presente, false altrimenti
 	 */
 	boolean contain(int id){
-		return clusteredData.get(id);
+		return clusteredData.contains(id);
 	}
 
 
@@ -74,7 +77,7 @@ public class Cluster {
 	 * @param id indice della tupla da rimuovere
 	 */
 	void removeTuple(int id){
-		clusteredData.delete(id);
+		clusteredData.remove(id);
 		
 	}
 
@@ -103,16 +106,17 @@ public class Cluster {
 		String str = "Centroid=( ";
 		for(int i = 0; i < centroid.getLength(); i++)
 			str += centroid.get(i)+ " ";
-		str += ")\nExamples:\n";
-		int array[]=clusteredData.toArray();
+		str += ")\n\nExamples:\n";
+		Integer array[]= new Integer[clusteredData.size()];
+		clusteredData.toArray(array);
 		for(int i = 0; i<array.length;  i++){
-			str+="[ ";
+			str+="[";
 			for( int j=0;j<data.getNumberOfAttributes(); j++)
 				str += data.getAttributeValue(array[i], j)+ " ";
 			str += "] dist="+getCentroid().getDistance(data.getItemSet(array[i])) + "\n";
 			
 		}
-		str += "\nAvgDistance=" + getCentroid().avgDistance(data, array);
+		str += "\nAvgDistance=" + getCentroid().avgDistance(data, array)+"\n";
 		return str;
 		
 	}

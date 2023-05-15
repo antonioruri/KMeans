@@ -65,7 +65,7 @@ public class Tuple {
      * @param clusteredData array di interi che rappresenta gli esempi di dati clusterizzati in questo clauster
      * @return la distanza media tra il centroide e gli esempi di dati clusterizzati
      */
-    public double avgDistance(Data data, int clusteredData[]){
+    public double avgDistance(Data data, Integer clusteredData[]){
         double p = 0.0, sumD = 0.0;
         for(int i = 0; i<clusteredData.length; i++){
             double d = getDistance(data.getItemSet(clusteredData[i]));
