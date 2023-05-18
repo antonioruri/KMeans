@@ -19,7 +19,6 @@ public class DiscreteItem extends Item {
     /**
      * Valuta la distanza tra due attributi discreti, restituisce 0 se sono uguali
      * 1 se sono diversi
-     *
      * @param a valore da cui calcolare la distanza
      * @return
      */
@@ -28,7 +27,6 @@ public class DiscreteItem extends Item {
             return 0;
         }
         else return 1;
-
     }
     
 }

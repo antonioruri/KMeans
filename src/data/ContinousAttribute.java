@@ -1,12 +1,14 @@
 package data;
 
 
+import java.util.Iterator;
+
 /**
  * Estende la classe data.Attribute e modella un attributo continuo. Include i metodi per la “normalizzazione”
  * del dominio dell'attributo nell'intervallo [0,1]
  * al fine da rendere confrontabili attributi aventi domini diversi
  */
-class ContinousAttribute extends Attribute {
+class ContinousAttribute extends Attribute{
 
     //estremi dell'intervallo di valori (dominio) che l'attributo può reamente assumere
     /**
@@ -27,7 +29,7 @@ class ContinousAttribute extends Attribute {
      * @param min estremo sinistro dell'intervallo di dominio dell'attributo
      * @param max estremo destro dell'intervallo di dominio dell'attributo
      */
-    private ContinousAttribute(String name, int index, double min, double max){
+    ContinousAttribute(String name, int index, double min, double max){
         super(name,index);
         this.min = min;
         this.max = max;
@@ -39,7 +41,7 @@ class ContinousAttribute extends Attribute {
      * @param v valore da normalizzare
      * @return valore normalizzato
      */
-    private double getScaledValue(double v){
+    double getScaledValue(double v){
         return (v-min)/(max-min);
     }
 

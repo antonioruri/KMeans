@@ -117,20 +117,20 @@ public class Data {
 		ex12.add(new String ("overcast"));
 		ex13.add(new String ("rain"));
 
-		ex0.add(new String ("hot"));
-		ex1.add(new String ("hot"));
-		ex2.add(new String ("hot"));
-		ex3.add(new String ("mild"));
-		ex4.add(new String ("cool"));
-		ex5.add(new String ("cool"));
-		ex6.add(new String ("cool"));
-		ex7.add(new String ("mild"));
-		ex8.add(new String ("cool"));
-		ex9.add(new String ("mild"));
-		ex10.add(new String ("mild"));
-		ex11.add(new String ("mild"));
-		ex12.add(new String ("hot"));
-		ex13.add(new String ("mild"));
+		ex0.add(new Double (37.5));
+		ex1.add(new Double (38.7));
+		ex2.add(new Double (37.5));
+		ex3.add(new Double (20.5));
+		ex4.add(new Double (20.7));
+		ex5.add(new Double (21.2));
+		ex6.add(new Double (20.5));
+		ex7.add(new Double (21.2));
+		ex8.add(new Double (21.2));
+		ex9.add(new Double (19.8));
+		ex10.add(new Double (3.5));
+		ex11.add(new Double (3.6));
+		ex12.add(new Double (3.5));
+		ex13.add(new Double (3.2));
 
 		ex0.add(new String ("high"));
 		ex1.add(new String ("high"));
@@ -205,11 +205,11 @@ public class Data {
 		outLookValues[2]="sunny";
 		attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
 
-		String temperatureValues[]=new String[3];
+		/*String temperatureValues[]=new String[3];
 		temperatureValues[0]="cool";
 		temperatureValues[1]="mild";
-		temperatureValues[2]="hot";
-		attributeSet.add(new DiscreteAttribute("Temperature",1, temperatureValues));
+		temperatureValues[2]="hot";*/
+		attributeSet.add(new ContinousAttribute("Temperature",1, 3.2,38.7));
 
 		String humidityValues[]=new String[2];
 		humidityValues[0]="normal";
@@ -290,10 +290,14 @@ public class Data {
 	 * @param index indice di riga
 	 * @return
 	 */
-	public Tuple getItemSet(int index){
-		Tuple tuple=new Tuple(getNumberOfAttributes());
-		for(int i = 0; i < getNumberOfAttributes(); i++)
-			tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i), (String)getAttributeValue(index,i)), i);
+	public Tuple getItemSet(int index) {
+		Tuple tuple = new Tuple(getNumberOfAttributes());
+		int i;
+		for (i = 0; i < getNumberOfAttributes(); i++)
+			if (getAttribute(i) instanceof DiscreteAttribute)
+				tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i), (String) getAttributeValue(index, i)), i);
+			else if(getAttribute(i) instanceof ContinousAttribute)
+				tuple.add(new ContinuousItem((ContinousAttribute) getAttribute(i),(Double) getAttributeValue(index,i)),i);
 		return tuple;
 	}
 
@@ -362,8 +366,23 @@ public class Data {
 	 * @return valore dell'attributo più frequente
 	 */
 	Object computePrototype(Set<Integer> idList, Attribute attribute){
-		return computePrototype(idList, (DiscreteAttribute)attribute);
+		if(attribute instanceof DiscreteAttribute)
+			return computePrototype(idList, (DiscreteAttribute) attribute);
+		else
+			return computePrototype(idList, (ContinousAttribute) attribute);
 	}
+
+	Double computePrototype(Set<Integer> idList, ContinousAttribute attribute){
+		double media=0.0;
+		int nValue = 0;
+		Iterator<Integer> it = idList.iterator();
+		while(it.hasNext()){
+			media += (double) data.get(it.next()).get(attribute.getIndex());
+			nValue++;
+		}
+		return media/nValue;
+	}
+
 
 	/**
 	 * Restituisce il prototipo di un attributo discreto, calcolato da un insieme di tuple,
