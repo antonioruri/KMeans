@@ -103,20 +103,20 @@ public class Cluster {
 	 */
 	
 	public String toString(Data data){
-		String str = "Centroid=( ";
+		String str = "\nCentroid=( ";
 		for(int i = 0; i < centroid.getLength(); i++)
 			str += centroid.get(i)+ " ";
-		str += ")\n\nExamples:\n";
-		Integer array[]= new Integer[clusteredData.size()];
-		clusteredData.toArray(array);
-		for(int i = 0; i<array.length;  i++){
+		str += ")\nExamples:\n";
+		//Integer array[]= new Integer[clusteredData.size()];
+		//clusteredData.toArray(array);
+		for(int i : clusteredData){
 			str+="[";
-			for( int j=0;j<data.getNumberOfAttributes(); j++)
-				str += data.getAttributeValue(array[i], j)+ " ";
-			str += "] dist="+getCentroid().getDistance(data.getItemSet(array[i])) + "\n";
+			for( int j=0; j<data.getNumberOfAttributes(); j++)
+				str += data.getAttributeValue(i, j)+ " ";
+			str += "] dist="+getCentroid().getDistance(data.getItemSet(i)) + "\n";
 			
 		}
-		str += "\nAvgDistance=" + getCentroid().avgDistance(data, array)+"\n";
+		str += "\nAvgDistance=" + getCentroid().avgDistance(data, clusteredData)+"\n";
 		return str;
 		
 	}

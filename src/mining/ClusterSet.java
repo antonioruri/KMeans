@@ -51,7 +51,7 @@ public class ClusterSet {
      */
     void initializeCentroids(Data data) throws OutOfRangeSamples {
         int[] centroidIndexes=data.sampling(C.length);
-        for(int i=0;i<centroidIndexes.length;i++) {
+        for(int i=0; i<centroidIndexes.length; i++) {
             Tuple centroidI=data.getItemSet(centroidIndexes[i]);
             add(new Cluster(centroidI));
         }
@@ -64,14 +64,14 @@ public class ClusterSet {
      * @return cluster più vicino alla tupla
      */
     Cluster nearestCluster(Tuple tuple){
-        double currentDistance = tuple.getDistance(get(0).getCentroid());
+        double currentDistance = tuple.getDistance(C[0].getCentroid());
         double tmp;
-        Cluster neareast = get(0);
+        Cluster neareast = C[0];
         for(int i=1; i < C.length; i++){
-            tmp = tuple.getDistance(get(i).getCentroid());
+            tmp = tuple.getDistance(C[i].getCentroid());
             if(tmp < currentDistance){
                 currentDistance = tmp;
-                neareast = get(i);
+                neareast = C[i];
             }
         }
         return neareast;

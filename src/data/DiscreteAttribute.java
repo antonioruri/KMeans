@@ -12,7 +12,7 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
      * Set ordinato di stringhe, uno per ciascun valore del dominio discreto.
      * I valori del dominio sono memorizzati in <code>values</code> seguendo un ordine lessicografico.
      */
-    private TreeSet<String> values = new TreeSet<String>();
+    private TreeSet<String> values;
 
     /**
      * Costrutture: invoca il costruttore della superclasse e avvalora
@@ -22,10 +22,9 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
      * @param index  identificativo numerico dell'attributo
      * @param values valori discreti rappresentanti il dominio dell'attributo
      */
-    DiscreteAttribute(String name, int index, String values[]) {
+    DiscreteAttribute(String name, int index, TreeSet<String> values) {
         super(name, index);
-        for(int i=0; i< values.length; i++)
-            this.values.add(values[i]);
+        this.values = values;
     }
 
     /**
@@ -47,14 +46,14 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
      * @return numero di occorrenze del valore discreto
      */
     int frequency(Data data, Set<Integer> idList, String v){
-        int[] idArray = new int[idList.size()];
+        /*int[] idArray = new int[idList.size()];
         int i = 0;
         for (Integer id : idList) {
             idArray[i++] = id;
-        }
+        }*/
         int frequenza = 0;
-        for (int j = 0; j < idArray.length; j++) {
-            if (data.getAttributeValue(idArray[j], getIndex()).equals(v)) {
+        for (int j : idList) {
+            if (data.getAttributeValue(j, getIndex()).equals(v)) {
                 frequenza++;
             }
         }

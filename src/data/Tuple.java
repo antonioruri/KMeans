@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Set;
+
 /**
  * La classe data.Tuple rappresenta una tupla come sequenza di coppie attributo-valore.
  */
@@ -65,13 +67,13 @@ public class Tuple {
      * @param clusteredData array di interi che rappresenta gli esempi di dati clusterizzati in questo clauster
      * @return la distanza media tra il centroide e gli esempi di dati clusterizzati
      */
-    public double avgDistance(Data data, Integer clusteredData[]){
+    public double avgDistance(Data data, Set<Integer> clusteredData){
         double p = 0.0, sumD = 0.0;
-        for(int i = 0; i<clusteredData.length; i++){
-            double d = getDistance(data.getItemSet(clusteredData[i]));
+        for(int i : clusteredData){
+            double d = getDistance(data.getItemSet(i));
             sumD += d;
         }
-        p = sumD/clusteredData.length;
+        p = sumD/(double) clusteredData.size();
         return p;
     }
 

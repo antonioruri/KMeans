@@ -1,5 +1,5 @@
 package data;
-
+//TO DO: Modificare e aggiungere Javadocs
 import java.util.*;
 
 /**
@@ -45,7 +45,10 @@ public class Data {
 				Object exObj = exIt.next();
 
 				if (!thisObj.equals(exObj)) {
-					return ((Comparable) thisObj).compareTo(exObj);
+					if( ((Comparable) thisObj).compareTo(exObj) > 1)
+						return 1;
+					else
+						return -1;
 				}
 			}
 			return 0;
@@ -75,7 +78,7 @@ public class Data {
 	/**
 	 * Vettore degli attributi in ciascuna tupla che sono avvalorati in ciscuna transione (schema della tabella di dati)
 	 */
-	private List<Attribute> attributeSet = new LinkedList<Attribute>();
+	private List<Attribute> attributeSet;
 
 	/**
 	 * Costruttore: inizializza la matrice data [ ][ ] con transazioni di esempio
@@ -102,80 +105,80 @@ public class Data {
 		Example ex12 = new Example();
 		Example ex13 = new Example();
 
-		ex0.add(new String ("sunny"));
-		ex1.add(new String ("sunny"));
-		ex2.add(new String ("overcast"));
-		ex3.add(new String ("rain"));
-		ex4.add(new String ("rain"));
-		ex5.add(new String ("rain"));
-		ex6.add(new String ("overcast"));
-		ex7.add(new String ("sunny"));
-		ex8.add(new String ("sunny"));
-		ex9.add(new String ("rain"));
-		ex10.add(new String ("sunny"));
-		ex11.add(new String ("overcast"));
-		ex12.add(new String ("overcast"));
-		ex13.add(new String ("rain"));
+		ex0.add("sunny");
+		ex1.add("sunny");
+		ex2.add("overcast");
+		ex3.add("rain");
+		ex4.add("rain");
+		ex5.add("rain");
+		ex6.add("overcast");
+		ex7.add("sunny");
+		ex8.add("sunny");
+		ex9.add("rain");
+		ex10.add("sunny");
+		ex11.add("overcast");
+		ex12.add("overcast");
+		ex13.add("rain");
 
-		ex0.add(new Double (37.5));
-		ex1.add(new Double (38.7));
-		ex2.add(new Double (37.5));
-		ex3.add(new Double (20.5));
-		ex4.add(new Double (20.7));
-		ex5.add(new Double (21.2));
-		ex6.add(new Double (20.5));
-		ex7.add(new Double (21.2));
-		ex8.add(new Double (21.2));
-		ex9.add(new Double (19.8));
-		ex10.add(new Double (3.5));
-		ex11.add(new Double (3.6));
-		ex12.add(new Double (3.5));
-		ex13.add(new Double (3.2));
+		ex0.add(37.5);
+		ex1.add(38.7);
+		ex2.add(37.5);
+		ex3.add(20.5);
+		ex4.add(20.7);
+		ex5.add(21.2);
+		ex6.add(20.5);
+		ex7.add(21.2);
+		ex8.add(21.2);
+		ex9.add(19.8);
+		ex10.add(3.5);
+		ex11.add(3.6);
+		ex12.add(3.5);
+		ex13.add(3.2);
 
-		ex0.add(new String ("high"));
-		ex1.add(new String ("high"));
-		ex2.add(new String ("high"));
-		ex3.add(new String ("high"));
-		ex4.add(new String ("normal"));
-		ex5.add(new String ("normal"));
-		ex6.add(new String ("normal"));
-		ex7.add(new String ("high"));
-		ex8.add(new String ("normal"));
-		ex9.add(new String ("normal"));
-		ex10.add(new String ("normal"));
-		ex11.add(new String ("high"));
-		ex12.add(new String ("normal"));
-		ex13.add(new String ("high"));
+		ex0.add("high");
+		ex1.add("high");
+		ex2.add("high");
+		ex3.add("high");
+		ex4.add("normal");
+		ex5.add("normal");
+		ex6.add("normal");
+		ex7.add("high");
+		ex8.add("normal");
+		ex9.add("normal");
+		ex10.add("normal");
+		ex11.add("high");
+		ex12.add("normal");
+		ex13.add("high");
 
-		ex0.add(new String ("weak"));
-		ex1.add(new String ("strong"));
-		ex2.add(new String ("weak"));
-		ex3.add(new String ("weak"));
-		ex4.add(new String ("weak"));
-		ex5.add(new String ("strong"));
-		ex6.add(new String ("strong"));
-		ex7.add(new String ("weak"));
-		ex8.add(new String ("weak"));
-		ex9.add(new String ("weak"));
-		ex10.add(new String ("strong"));
-		ex11.add(new String ("strong"));
-		ex12.add(new String ("weak"));
-		ex13.add(new String ("strong"));
+		ex0.add("weak");
+		ex1.add("strong");
+		ex2.add("weak");
+		ex3.add("weak");
+		ex4.add("weak");
+		ex5.add("strong");
+		ex6.add("strong");
+		ex7.add("weak");
+		ex8.add("weak");
+		ex9.add("weak");
+		ex10.add("strong");
+		ex11.add("strong");
+		ex12.add("weak");
+		ex13.add("strong");
 
-		ex0.add(new String ("no"));
-		ex1.add(new String ("no"));
-		ex2.add(new String ("yes"));
-		ex3.add(new String ("yes"));
-		ex4.add(new String ("yes"));
-		ex5.add(new String ("no"));
-		ex6.add(new String ("yes"));
-		ex7.add(new String ("no"));
-		ex8.add(new String ("yes"));
-		ex9.add(new String ("yes"));
-		ex10.add(new String ("yes"));
-		ex11.add(new String ("yes"));
-		ex12.add(new String ("yes"));
-		ex13.add(new String ("no"));
+		ex0.add("no");
+		ex1.add("no");
+		ex2.add("yes");
+		ex3.add("yes");
+		ex4.add("yes");
+		ex5.add("no");
+		ex6.add("yes");
+		ex7.add("no");
+		ex8.add("yes");
+		ex9.add("yes");
+		ex10.add("yes");
+		ex11.add("yes");
+		ex12.add("yes");
+		ex13.add("no");
 
 		tempData.add(ex0);
 		tempData.add(ex1);
@@ -195,35 +198,34 @@ public class Data {
 		data = new ArrayList<Example>(tempData);
 		numberOfExamples = tempData.size();
 
+		attributeSet = new LinkedList<>();
+
+
 		/**
 		 * Viene avvalorato ciascun elemento di <code>attributeSet</code> con un oggetto della classe <code>DiscreteAttribute</code>
 		 * che modella il corrispondente attributo (e.g. outlook, temperature, humidity etc.)
 		 */
-		String outLookValues[]=new String[3];
-		outLookValues[0]="overcast";
-		outLookValues[1]="rain";
-		outLookValues[2]="sunny";
+		TreeSet<String> outLookValues = new TreeSet<String>();
+		outLookValues.add("overcast");
+		outLookValues.add("rain");
+		outLookValues.add("sunny");
 		attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
 
-		/*String temperatureValues[]=new String[3];
-		temperatureValues[0]="cool";
-		temperatureValues[1]="mild";
-		temperatureValues[2]="hot";*/
-		attributeSet.add(new ContinousAttribute("Temperature",1, 3.2,38.7));
+		attributeSet.add(new ContinuousAttribute("Temperature",1, 3.2,38.7));
 
-		String humidityValues[]=new String[2];
-		humidityValues[0]="normal";
-		humidityValues[1]="high";
+		TreeSet<String> humidityValues = new TreeSet<String>();
+		humidityValues.add("normal");
+		humidityValues.add("high");
 		attributeSet.add(new DiscreteAttribute("Humidity",2, humidityValues));
 
-		String windValues[]=new String[2];
-		windValues[0]="strong";
-		windValues[1]="weak";
+		TreeSet<String> windValues = new TreeSet<>();
+		windValues.add("strong");
+		windValues.add("weak");
 		attributeSet.add(new DiscreteAttribute("Wind",3, windValues));
 
-		String playTennisValue[]=new String[2];
-		playTennisValue[0]="yes";
-		playTennisValue[1]="no";
+		TreeSet<String> playTennisValue =new TreeSet<>();
+		playTennisValue.add("yes");
+		playTennisValue.add("no");
 		attributeSet.add(new DiscreteAttribute("PlayTennis",4, playTennisValue));
 		
 	}
@@ -233,7 +235,7 @@ public class Data {
 	 * @return cardilità dell'insieme di transazioni
 	 */
 	public int getNumberOfExamples(){
-		return this.numberOfExamples;
+		return numberOfExamples;
 	}
 
 	/**
@@ -241,7 +243,7 @@ public class Data {
 	 * @return cardinalità dell'insieme degli attributi
 	 */
 	public int getNumberOfAttributes(){
-		return this.attributeSet.size();
+		return attributeSet.size();
 	}
 
 	/**
@@ -252,11 +254,11 @@ public class Data {
 	 * nella tupla identificata da exampleindex nel membro data
 	 */
 	public Object getAttributeValue(int exampleIndex, int attributeIndex){
-		return this.data.get(exampleIndex).get(attributeIndex);
+		return data.get(exampleIndex).get(attributeIndex);
 	}
 
 	/**
-	 * Restiusce l'attributo in posizone <code>index</code> di <code>attributeSet</code>
+	 * Restiusce l'attributo in posizone index di attributeSet
 	 * @param index posizione di un attributo in attributeSet
 	 * @return attributo con indice index in attributeSet
 	 */
@@ -267,7 +269,6 @@ public class Data {
 	@Override
 	public String toString(){
 		String table = new String();
-
 		table += getAttribute(0);
 		for(int i=1; i < getNumberOfAttributes(); i++){
 			table += ","+ getAttribute(i);
@@ -292,12 +293,11 @@ public class Data {
 	 */
 	public Tuple getItemSet(int index) {
 		Tuple tuple = new Tuple(getNumberOfAttributes());
-		int i;
-		for (i = 0; i < getNumberOfAttributes(); i++)
+		for (int i = 0; i < getNumberOfAttributes(); i++)
 			if (getAttribute(i) instanceof DiscreteAttribute)
 				tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i), (String) getAttributeValue(index, i)), i);
-			else if(getAttribute(i) instanceof ContinousAttribute)
-				tuple.add(new ContinuousItem((ContinousAttribute) getAttribute(i),(Double) getAttributeValue(index,i)),i);
+			else //if(getAttribute(i) instanceof ContinuousAttribute)
+				tuple.add(new ContinuousItem((ContinuousAttribute) getAttribute(i),(Double) getAttributeValue(index,i)),i);
 		return tuple;
 	}
 
@@ -369,18 +369,15 @@ public class Data {
 		if(attribute instanceof DiscreteAttribute)
 			return computePrototype(idList, (DiscreteAttribute) attribute);
 		else
-			return computePrototype(idList, (ContinousAttribute) attribute);
+			return computePrototype(idList, (ContinuousAttribute) attribute);
 	}
 
-	Double computePrototype(Set<Integer> idList, ContinousAttribute attribute){
+	Double computePrototype(Set<Integer> idList, ContinuousAttribute attribute){
 		double media=0.0;
-		int nValue = 0;
-		Iterator<Integer> it = idList.iterator();
-		while(it.hasNext()){
-			media += (double) data.get(it.next()).get(attribute.getIndex());
-			nValue++;
+		for(int i : idList){
+			media += (double) data.get(i).get(attribute.getIndex());
 		}
-		return media/nValue;
+		return media / (double) idList.size();
 	}
 
 
@@ -392,15 +389,13 @@ public class Data {
 	 * @return il valore dell'attributo discreto più frequente
 	 */
 	private String computePrototype(Set<Integer> idList,DiscreteAttribute attribute) {
-		Iterator<String> it = attribute.iterator();
-		Iterator<String> it1 = attribute.iterator();
 		String mostFrequentValue = "";
 		String currentValue;
 		int maxFreq=0;
 		int currentFreq;
-		while(it.hasNext() && it1.hasNext()) {
-			currentFreq=attribute.frequency(this, idList, it.next());
-			currentValue=it1.next();
+		for(String v : attribute) {
+			currentFreq=attribute.frequency(this, idList, v);
+			currentValue=v;
 			if(currentFreq>=maxFreq) {
 				maxFreq=currentFreq;
 				mostFrequentValue=currentValue;
@@ -415,7 +410,7 @@ public class Data {
 	 */
 
 	public static void main(String args[]){
-		Data trainingSet=new Data();
+		Data trainingSet = new Data();
 		System.out.println(trainingSet);
 
 	}

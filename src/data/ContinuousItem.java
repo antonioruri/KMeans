@@ -1,5 +1,7 @@
 package data;
 
+import static java.lang.Math.abs;
+
 public class ContinuousItem extends Item {
 
 
@@ -22,7 +24,7 @@ public class ContinuousItem extends Item {
      */
     @Override
     double distance(Object a) {
-        //ContinousAttribute x = (ContinousAttribute) this.getAttribute();
-        return ((ContinousAttribute) this.getAttribute()).getScaledValue((Double) this.getValue()) -  ( (ContinousAttribute) this.getAttribute()).getScaledValue((Double) a) ;
+        ContinuousAttribute x = (ContinuousAttribute) this.getAttribute();
+        return abs(x.getScaledValue((Double) this.getValue()) -  ( x.getScaledValue((Double) a))); //senza il valore assoluto andava in loop
     }
 }
