@@ -3,19 +3,25 @@ package data;
 import java.util.*;
 
 /**
- * Classe che modella l'insieme di transazioni o tuple
+ * La classe Data rappresenta un insieme di dati organzzati in forma taballare con righe che rappresentano
+ * le transazioni o tuple, e colonne che rappresentano gli attributi avvalorati
  */
 public class Data {
+
+	/**
+	 * Inner class Example modella ciascuna singola transazione o tupla
+	 * implementa l'intergaccia generica Comparable
+	 */
 	class Example implements Comparable<Example>{
 
 		/**
-		 * Array di object che rappresentano la singola transazione (o riga di una tabella)
+		 * ArrayList di Object che rappresentano la singola transazione (o riga di una tabella)
 		 */
 		private List<Object> example = new ArrayList<Object>();
 
 		/**
-		 * Aggiunge in coda ad example
-		 * @param o membro da aggiungere in coda
+		 * Aggiunge l'elemento passato in input in coda ad alla Lista example
+		 * @param o elemento da aggiungere in coda alla lista
 		 */
 		void add(Object o){
 			example.add(o);
@@ -31,29 +37,31 @@ public class Data {
 		}
 
 		/**
+		 * Confronta l'oggetto this con l'oggetto Example passato in input.
 		 * Restituisce 0, -1, 1 sulla base del risultato del confronto. 0 se i due esempi includono gli stessi valori.
-		 * Altrimenti il risultato del compareTo(...) invocato sulla prima coppia di valori in disaccordo.
+		 * Altrimenti restituisce il risultato del compareTo() invocato sulla prima coppia di valori in disaccordo.
 		 * @param ex lista da confrontare
-		 * @return 0 se i valori sono uguali. ALtrimenti -1 o 1 sulla base del risultato de l confronto.
+		 * @return 0 se i valori sono uguali. ALtrimenti -1 o 1 sulla base del risultato del confronto.
 		 */
 		public int compareTo(Example ex) {
-			Iterator<Object> thisIt = this.example.iterator();
-			Iterator<Object> exIt = ex.example.iterator();
-
-			while(thisIt.hasNext() && exIt.hasNext()) {
-				Object thisObj = thisIt.next();
-				Object exObj = exIt.next();
-
-				if (!thisObj.equals(exObj)) {
-					if( ((Comparable) thisObj).compareTo(exObj) > 1)
+			int i=0;
+			for(Object o : ex.example){
+				if(!o.equals(this.example.get(i))) {
+					if (((Comparable) o).compareTo(this.example.get(i)) > 0)
 						return 1;
 					else
 						return -1;
 				}
+				i++;
 			}
 			return 0;
+
 		}
 
+		/**
+		 * Restituisce una stringa che descrive lo stato delle tuple
+		 * @return una stringa che rappresenta lo stato di example
+		 */
 		@Override
 		public String toString(){
 			String str = new String();
@@ -65,25 +73,23 @@ public class Data {
 
 
 	/**
-	 * Matrice di <code>Object</code> con numero di righe pari al numero di transazioni da memorizzare
-	 * e numero di colonne pari al numero di attributi in ciascuna transazione
+	 * Lista di {@code Example}, rappresenta le transazioni memorizzate
 	 */
 	private List<Example> data;
 
 	/**
-	 * Cardinalità dell’insieme di transazioni (numero di righe in data)
+	 * Cardinalità dell’insieme di transazioni
 	 */
 	private int numberOfExamples;
 
 	/**
-	 * Vettore degli attributi in ciascuna tupla che sono avvalorati in ciscuna transione (schema della tabella di dati)
+	 * Lista di {@code Attribute}, rappresenta gli Attributi modellati nel trainingSet
 	 */
 	private List<Attribute> attributeSet;
 
 	/**
-	 * Costruttore: inizializza la matrice data [ ][ ] con transazioni di esempio
-	 * Inizializza attributeSet creando cinque oggetti di tipo DiscreteAttribute, uno per ciascun attributo
-	 * Inizializza numberOfExamples
+	 * Costruttore della classe, inizializza i membri dell'ArrayList data con tuple di esempio.
+	 * Viene usato per questo un {@code TreeSet<>} per avere elementi ordinati e non duplicati.
 	 */
 	public Data(){
 		
@@ -202,7 +208,7 @@ public class Data {
 
 
 		/**
-		 * Viene avvalorato ciascun elemento di <code>attributeSet</code> con un oggetto della classe <code>DiscreteAttribute</code>
+		 * Viene avvalorato ciascun elemento di {@code attributeSet} con un oggetto {@code DiscreteAttribute}
 		 * che modella il corrispondente attributo (e.g. outlook, temperature, humidity etc.)
 		 */
 		TreeSet<String> outLookValues = new TreeSet<String>();
@@ -231,7 +237,7 @@ public class Data {
 	}
 
 	/**
-	 * Restituisce il valore del membro <code>numberOfExamples</code>
+	 * Restituisce la cardinalità dell'insieme di transazioni
 	 * @return cardilità dell'insieme di transazioni
 	 */
 	public int getNumberOfExamples(){
@@ -239,7 +245,7 @@ public class Data {
 	}
 
 	/**
-	 * Restituisce la cardinalità del membro <code>attributeSet</code>
+	 * Restituisce la cardinalità dell'insieme degli attributi
 	 * @return cardinalità dell'insieme degli attributi
 	 */
 	public int getNumberOfAttributes(){
@@ -247,10 +253,10 @@ public class Data {
 	}
 
 	/**
-	 * Restituisce il valore dell'attributo <code>attributeIndex</code> per la tupla <code>exampleIndex</code> memorizzata in data
-	 * @param exampleIndex Indice di riga della matrice data[][] che corrisponde ad una determinata transazione
-	 * @param attributeIndex Indice di colonna in riferimento alla matrice memorizzata in data
-	 * @return Valore assunto dall'attributo identificato da attributeIndex
+	 * Restituisce il valore dell'attributo specificato nella tupla specificata memorizzata in data
+	 * @param exampleIndex Indice della tupla specificata
+	 * @param attributeIndex Indice dell'attributo specificato
+	 * @return Valore memorizzato in data dall'attributo identificato da attributeIndex
 	 * nella tupla identificata da exampleindex nel membro data
 	 */
 	public Object getAttributeValue(int exampleIndex, int attributeIndex){
@@ -270,8 +276,8 @@ public class Data {
 	public String toString(){
 		String table = new String();
 		table += getAttribute(0);
-		for(int i=1; i < getNumberOfAttributes(); i++){
-			table += ","+ getAttribute(i);
+		for(Attribute a : attributeSet){
+			table += "," + a;
 		}
 		table += "\n";
 		for(int i=0; i < getNumberOfExamples(); i++){
@@ -286,43 +292,36 @@ public class Data {
 
 
 	/**
-	 * Crea e restituisce un oggetto di <code>data.Tuple</code> che modella
-	 * come sequenza di coppie Attributo-valore la i-esima riga in <code>data</code>
+	 * Crea e restituisce un oggetto di Tuple che modella come sequenza
+	 * di coppie Attributo-valore la i-esima riga in data.
 	 * @param index indice di riga
-	 * @return
+	 * @return un oggetto di Tuple che modella come sequenza
+	 * di coppie Attributo-valore la i-esima riga in data.
 	 */
 	public Tuple getItemSet(int index) {
 		Tuple tuple = new Tuple(getNumberOfAttributes());
 		for (int i = 0; i < getNumberOfAttributes(); i++)
 			if (getAttribute(i) instanceof DiscreteAttribute)
 				tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i), (String) getAttributeValue(index, i)), i);
-			else //if(getAttribute(i) instanceof ContinuousAttribute)
+			else
 				tuple.add(new ContinuousItem((ContinuousAttribute) getAttribute(i),(Double) getAttributeValue(index,i)),i);
 		return tuple;
 	}
 
 	/**
-	 * Seleziona <code>k</code> centroidi casuali da un insieme di dati, utilizza un oggetto
-	 * <code>Random</code> per generare numeri casuali. Per selezionare ogni centroide viene
-	 * controllato con un ciclo <code>do-while</code> un numero casuale generato compreso tra 0 e il
-	 * numero totale di righe della matrice di dati se corrisponde ad un centroide già selezionato e
-	 * memorizzato in <code>centroidIndexes</code>
-	 * @param k numero di centroidi casuali da selezionare da un insieme di dati
+	 * Seleziona k centroidi casuali con l'utilizzo della classa {@code Random} generando un numero
+	 * compreso tra 0 e il numero totale di tuple memorizzate.Verifica se il centroide trovato è già memorizzato,
+	 * in caso negativo viene memorizzato in in array di interi l'indice del centroide.
+	 * @param k numero di centroidi casuali da selezionare
 	 * @throws OutOfRangeSamples se k il numero di cluster da generare è maggiore del numero
-	 * di cluster generabili o troppo piccolo
-	 * @return array di k interi contenente gli indici di riga in data per le
-	 * tuple corrispondenti ai centroidi selezionati
+	 * di cluster generabili o uguale a 0
+	 * @return array di k interi contenente gli indici delle tuple corrispondenti ai centroidi selezionati
 	 */
 	public int[] sampling(int k) throws OutOfRangeSamples{
-		//choose k random different centroids in data.
 
-		//lancia un'ecczione se k non è valido
-		if(k > getNumberOfExamples()){
-			throw new OutOfRangeSamples("Numero k maggiore del numero di cluster generabili");
-		}else if(k == 0){
-				throw new OutOfRangeSamples("Numero k troppo piccolo");
+		if( k == 0 || k > getNumberOfExamples()){
+			throw new OutOfRangeSamples("Numero di cluster inserito non valido. Inserire un valore compreso tra 1 e " + getNumberOfExamples() + ".");
 		}
-
 		int centroidIndexes[]=new int[k];
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
@@ -345,7 +344,7 @@ public class Data {
 	}
 
 	/**
-	 * Confronta due tuple del dataset per verificare se sono uguali.
+	 * Confronta due tuple specificate per verificare se sono uguali.
 	 * @param i indice di tupla
 	 * @param j indice di tupla
 	 * @return true se gli elementi delle tuple sono uguali, false altrimenti
@@ -360,10 +359,7 @@ public class Data {
 	}
 
 	/**
-	 * Restituisce computePrototype(idList, (DiscreteAttribute)attribute)
-	 * @param idList indici delle tuple da considerare nel calcolo del prototipo
-	 * @param attribute attributo rispetto al quale calcolare il prototipo (centroide)
-	 * @return valore dell'attributo più frequente
+	 * Viene utilizzato l'RTTI per calcolare il valore prototipo corrispondente ad una istanza dell' attributo specificato (discreto o continuo)
 	 */
 	Object computePrototype(Set<Integer> idList, Attribute attribute){
 		if(attribute instanceof DiscreteAttribute)
@@ -372,6 +368,13 @@ public class Data {
 			return computePrototype(idList, (ContinuousAttribute) attribute);
 	}
 
+	/**
+	 * Determina il valore prototipo come la media dei valori dell'attributo
+	 * continuo specificato nelle transazioni di data aventi indice in idList
+	 * @param idList insieme degli indici delle tuple su cui calcolare la media
+	 * @param attribute attributo continuo specificato
+	 * @return la media dei valori dell'attributo specificato nelle transazioni indicate.
+	 */
 	Double computePrototype(Set<Integer> idList, ContinuousAttribute attribute){
 		double media=0.0;
 		for(int i : idList){
@@ -382,7 +385,7 @@ public class Data {
 
 
 	/**
-	 * Restituisce il prototipo di un attributo discreto, calcolato da un insieme di tuple,
+	 * Restituisce il valore prototipo di un attributo discreto, calcolato da un insieme di tuple,
 	 * corrisponde al valore discreto che compare più frequentemente tra le tuple di <code>idList</code>
 	 * @param idList indici delle tuple da considerare nel calcolo del prototipo
 	 * @param attribute attributo discreto di cui calcolare il prototipo
@@ -405,7 +408,7 @@ public class Data {
 	}
 
 	/**
-	 * Metodo main della classe data.Data che consente il test delle classi implementate, permetta la stampa dell'insieme di transazioni.
+	 * Metodo main della classe Data che consente il test delle classi implementate, permetta la stampa dell'insieme di transazioni.
 	 * @param args un array di stringhe contenente gli argomenti passati alla riga di comando.
 	 */
 

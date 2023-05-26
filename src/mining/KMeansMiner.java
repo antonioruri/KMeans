@@ -6,7 +6,9 @@ import data.OutOfRangeSamples;
 public class KMeansMiner {
     ClusterSet C;
 
-    public KMeansMiner(int k){
+    public KMeansMiner(int k) throws OutOfRangeSamples {
+        if(k < 0)
+           throw new OutOfRangeSamples("Il numero di cluster non può essere negativo");
         C = new ClusterSet(k);
     }
 
