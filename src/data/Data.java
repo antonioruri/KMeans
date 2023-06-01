@@ -275,10 +275,10 @@ public class Data {
 	@Override
 	public String toString(){
 		String table = new String();
-		table += getAttribute(0);
 		for(Attribute a : attributeSet){
-			table += "," + a;
+			table += a + ",";
 		}
+		table = table.substring(0, table.length() - 1); //Rimuove la virgola in eccesso
 		table += "\n";
 		for(int i=0; i < getNumberOfExamples(); i++){
 			table += i+1+ ": ";

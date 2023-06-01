@@ -10,17 +10,18 @@ import java.util.TreeSet;
 class DiscreteAttribute extends Attribute implements Iterable<String>{
     /**
      * Set ordinato di stringhe, uno per ciascun valore del dominio discreto.
-     * I valori del dominio sono memorizzati in <code>values</code> seguendo un ordine lessicografico.
+     * I valori del dominio vengono memorizzati seguendo un ordine lessicografico con la struttura TreeSet.
      */
     private TreeSet<String> values;
 
     /**
-     * Costrutture: invoca il costruttore della superclasse e avvalora
-     * l'array <code>values</code> con i parametri discreti in input
+     * Costruisce un nuovo attributo invoca il costruttore della superclasse
+     * per inizializzare i campi {@code Index} e {@code Name} di un attributo,
+     * quindi inizializza il Set {@code values} con quello passato in input.
      *
-     * @param name   nome simbolico dell'attributo
-     * @param index  identificativo numerico dell'attributo
-     * @param values valori discreti rappresentanti il dominio dell'attributo
+     * @param name   nome simbolico dell'attributo discreto
+     * @param index  indice dell'attributo discreto
+     * @param values Set di valori discreti, rappresentano il dominio dell'attributo discreto
      */
     DiscreteAttribute(String name, int index, TreeSet<String> values) {
         super(name, index);

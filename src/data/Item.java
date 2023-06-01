@@ -3,21 +3,21 @@ package data;
 import java.util.Set;
 
 /**
- * Classe astratta che modella un generico data.Item (coppia attributo-valore, es. Outlook="Sunny")
+ * Classe astratta che modella un generica coppia attributo-valore, es. Outlook="Sunny"
  */
 
 public abstract class Item {
     /**
      * Attributo coinvolto nell'item
      */
-    private Attribute attribute; //attributo coinvolto nell'item
+    private final Attribute attribute; //attributo coinvolto nell'item
     /**
      * Valore assegnato all'attributo
      */
     private Object value; //valore assegnato all'attributo
 
     /**
-     * Costruttore della classe, inizializza i valori dei membri con quelli passati in input
+     * Costruttore della classe, inizializza i valori di un {@code Item} con quelli passati in input
      * @param attribute Attributo coinvolto nell'item
      * @param value Valore assegnato all'attributo
      */
@@ -27,7 +27,7 @@ public abstract class Item {
     }
 
     /**
-     * Restituisce il valore di <code>attribute</code>
+     * Restituisce il valore di attribute
      * @return valore di attribute
      */
     Attribute getAttribute(){
@@ -35,7 +35,7 @@ public abstract class Item {
     }
 
     /**
-     * Restituisce il valore di <code>value</code>
+     * Restituisce il valore di value
      * @return valore di value
      */
     Object getValue(){
@@ -59,7 +59,7 @@ public abstract class Item {
     abstract double distance(Object a);
 
     /**
-     * Modifica il membro <code>value</code>>, assegnandogli il valore
+     * Modifica il membro value, assegnandogli il valore
      * restituito da <code>data.computePrototype(clusteredData,attribute)</code>
      * @param data riferimento ad un oggetto della classe data.Data
      * @param clusteredData insieme di indici delle righe della matrice in data che formano il cluster
