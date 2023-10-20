@@ -1,12 +1,13 @@
 package data;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * La classe data.Tuple rappresenta una tupla come sequenza di coppie attributo-valore.
  */
 
-public class Tuple {
+public class Tuple implements Serializable {
     /**
      *  Array di oggetti di tipo data.Item, rappresenta una sequenza di coppie
      *  attributo-valore che costituiscono una tupla
@@ -68,7 +69,7 @@ public class Tuple {
      * @return la distanza media tra il centroide e gli esempi di dati clusterizzati
      */
     public double avgDistance(Data data, Set<Integer> clusteredData){
-        double p = 0.0, sumD = 0.0;
+        double p, sumD = 0.0;
         for(int i : clusteredData){
             double d = getDistance(data.getItemSet(i));
             sumD += d;

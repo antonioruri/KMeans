@@ -47,11 +47,6 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
      * @return numero di occorrenze del valore discreto
      */
     int frequency(Data data, Set<Integer> idList, String v){
-        /*int[] idArray = new int[idList.size()];
-        int i = 0;
-        for (Integer id : idList) {
-            idArray[i++] = id;
-        }*/
         int frequenza = 0;
         for (int j : idList) {
             if (data.getAttributeValue(j, getIndex()).equals(v)) {

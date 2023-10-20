@@ -1,12 +1,13 @@
 package data;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Classe astratta che modella un generica coppia attributo-valore, es. Outlook="Sunny"
  */
 
-public abstract class Item {
+public abstract class Item implements Serializable{
     /**
      * Attributo coinvolto nell'item
      */

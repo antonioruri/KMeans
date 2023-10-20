@@ -1,9 +1,9 @@
 package data;
-
+import java.io.Serializable;
 /**
  * Classe astratta che modella un generico attributo, discreto o continuo.
  */
-abstract class Attribute {
+abstract class Attribute implements Serializable{
     /**
      * Nome simbolico dell'attributo
      */

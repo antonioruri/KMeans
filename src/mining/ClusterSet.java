@@ -3,6 +3,7 @@ package mining;
 import data.Data;
 import data.OutOfRangeSamples;
 import data.Tuple;
+import java.io.Serializable;
 
 /**
  * Classe che rappresenta un insieme di cluster. Gli oggetti di questa classe
@@ -11,7 +12,7 @@ import data.Tuple;
  * La classe fornisce metodi per identificare il cluster più vicino
  * ad una data tupla, calcolare il nuovo centroide per ciascun cluster
  */
-public class ClusterSet {
+public class ClusterSet implements Serializable{
     private Cluster C[];
     private int i = 0; //posiizone valida per la memorizazzione di un nuovo cluster in C
 

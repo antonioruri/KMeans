@@ -302,9 +302,9 @@ public class Data {
 		Tuple tuple = new Tuple(getNumberOfAttributes());
 		for (int i = 0; i < getNumberOfAttributes(); i++)
 			if (getAttribute(i) instanceof DiscreteAttribute)
-				tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i), (String) getAttributeValue(index, i)), i);
+				tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i), (String) getAttributeValue(index,i)),i);
 			else
-				tuple.add(new ContinuousItem((ContinuousAttribute) getAttribute(i),(Double) getAttributeValue(index,i)),i);
+				tuple.add(new ContinuousItem(getAttribute(i),(Double) getAttributeValue(index,i)),i);
 		return tuple;
 	}
 

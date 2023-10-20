@@ -3,8 +3,30 @@ package mining;
 import data.Data;
 import data.OutOfRangeSamples;
 
-public class KMeansMiner {
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class KMeansMiner implements Serializable {
     ClusterSet C;
+
+    public KMeansMiner(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException{
+        FileInputStream inFile = new FileInputStream(fileName);
+        ObjectInputStream inStream = new ObjectInputStream(inFile);
+        KMeansMiner k = (KMeansMiner) inStream.readObject();
+        C=k.getC();
+        inStream.close();
+    }
+
+    public void salva(String filename) throws FileNotFoundException, IOException{
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+        out.writeObject(this);
+        out.close();
+    }
 
     public KMeansMiner(int k) throws OutOfRangeSamples {
         if(k < 0)
@@ -17,7 +39,6 @@ public class KMeansMiner {
     }
 
     public int kmeans(Data data) throws OutOfRangeSamples {
-        //System.out.println("qua");
         int numberOfIterations=0;
         //STEP 1
         C.initializeCentroids(data);
@@ -42,6 +63,7 @@ public class KMeansMiner {
         }while(changedCluster);
         return numberOfIterations;
     }
+
 }
 
 

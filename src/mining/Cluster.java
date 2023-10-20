@@ -3,6 +3,7 @@ package mining;
 import data.Data;
 import data.Tuple;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
  * simili tra di loro, e viene utilizzata per contenere le tuple assegnate ad ogni cluster.
  * Ogni cluster ha un centroide, ovvero un punto nello spazio degli attributi che rappresenta il centro del cluster.
  */
-public class Cluster {
+public class Cluster implements Serializable {
 	/**
 	 * Rappresenta la media delle tuple del cluster
 	 */
