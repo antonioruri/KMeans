@@ -70,7 +70,8 @@ public class Data {
 			return str;
 		}
 	}
-
+	//rimuovere questa classe ed utilizzare quella di database.Example
+	//per prendere esempi da un database
 
 	/**
 	 * Lista di {@code Example}, rappresenta le transazioni memorizzate
