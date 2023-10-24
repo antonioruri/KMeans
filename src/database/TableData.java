@@ -14,8 +14,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-
+import com.mysql.cj.jdbc.exceptions.NotUpdatable;
 import database.TableSchema.Column;
+
+import javax.swing.plaf.nimbus.State;
 
 
 public class TableData {
@@ -71,8 +73,24 @@ public class TableData {
 		return values;
 	}
 
-	public  Object getAggregateColumnValue(String table,Column column,QUERY_TYPE aggregate) throws SQLException,NoValueException{
-		\\ to do
+	public  Object getAggregateColumnValue(String table,Column column,QUERY_TYPE aggregate) throws SQLException, NoValueException, DatabaseConnectionException {
+		Object obj = null;
+		Connection conn = db.getConnection();
+		Statement s  = conn.createStatement();
+
+		String query = "SELECT "+ aggregate + "(" + column.getColumnName() + ") AS " + column.getColumnName() + " FROM " + table;
+		ResultSet resultSet = s.executeQuery(query);
+		while(resultSet.next()){
+			if(column.isNumber())
+				obj = resultSet.getDouble(column.getColumnName());
+			else
+				obj = resultSet.getString(column.getColumnName());
+		}
+		resultSet.close();
+		s.close();
+		if(obj == null)
+			throw new NoValueException();
+		return obj;
 	}
 
 	
